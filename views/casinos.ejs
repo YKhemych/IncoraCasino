@@ -1,0 +1,52 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title><%= title%></title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="#">Incora Casino</a>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="http://localhost:5000/api/auth/login">Login</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="http://localhost:5000/api/auth/register">Register</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="http://localhost:5000/api/auth/login">Exit</a>
+            </li>
+        </ul>
+        <p class="navbar-text" id="info" style="margin: 0">
+            <%= user.name%>   Money: <%= user.money%>
+        </p>
+    </div>
+</nav>
+
+<div style="display: flex; flex-direction: column; margin: 10px 20px;">
+    <h2 style="align-self: center">Choose casino</h2>
+
+    <div class="row" style="padding: 40px; margin: 0 5px">
+        <% for(var i=0; i < casinos.length; i++) {%>
+            <div class="col-sm-4">
+                <div class="card">
+                    <div class="card-block">
+                        <h3 class="card-title" style="text-align: center; margin: 5px"><a href="<%= casinos[i].name%>/"><%= casinos[i].name%></a></h3>
+                    </div>
+                </div>
+            </div>
+        <%} %>
+    </div>
+    <% if (user.role == "SUPERADMIN") { %>
+        <a href="addPage" class="btn btn-dark" style="color: white; align-self: center">Create casino</a>
+    <% }%>
+
+</div>
+
+</body>
+</html>

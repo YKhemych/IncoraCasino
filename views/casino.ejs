@@ -1,0 +1,59 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title><%= title%></title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="#">Incora Casino</a>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="http://localhost:5000/api/auth/login">Login</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="http://localhost:5000/api/auth/register">Register</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="http://localhost:5000/api/user/<%= user.name%>/casino/all">Back to list of casinos</a>
+            </li>
+        </ul>
+        <p class="navbar-text" id="info" style="margin: 0">
+            <%= user.name%>   Money: <%= user.money%>
+        </p>
+    </div>
+</nav>
+
+<div style="display: flex; flex-direction: column; margin: 10px 20px;">
+    <h2 style="align-self: center">Welcome to casino <%= casino.name%>. Choose game machine to play</h2>
+
+    <div class="row" style="padding: 40px; margin: 0 5px">
+        <% for(var i=0; i < gameMachines.length; i++) {%>
+            <div class="col-md-4" style="margin: 20px auto">
+                <div class="card">
+                    <div class="card-block">
+                        <h3 class="card-title" style="text-align: center; margin: 5px"><a href="gm/<%= gameMachines[i].id%>/"><%= gameMachines[i].id%></a></h3>
+                    </div>
+                </div>
+            </div>
+        <%} %>
+    </div>
+    <h3 style="align-self: center">  <%= message%> </h3>
+    <div style="align-self: center">
+        <% if (casino.owner == user.id) { %>
+            <a href="gm/addPage" class="btn btn-dark" style="color: white; align-self: center">Create game machine</a>
+            <a href="numberOfMachine" class="btn btn-dark" style="color: white; align-self: center">Number of game machine</a>
+            <a href="allMoney" class="btn btn-dark" style="color: white; align-self: center">All money in casino</a>
+            <a href="pickUpMoney" class="btn btn-dark" style="color: white; align-self: center">Pick up money from casino</a>
+            <a href="putMoney" class="btn btn-dark" style="color: white; align-self: center">Put money to casino</a>
+        <% }%>
+    </div>
+
+</div>
+
+</body>
+</html>

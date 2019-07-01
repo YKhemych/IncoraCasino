@@ -1,0 +1,64 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title><%= title%></title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="#">Incora Casino</a>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="http://localhost:5000/api/auth/login">Login</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="http://localhost:5000/api/auth/register">Register</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="http://localhost:5000/api/user/<%= user.name%>/casino/<%= casino.name%>/">Back to casino</a>
+            </li>
+        </ul>
+        <p class="navbar-text" id="info" style="margin: 0">
+            <%= user.name%>   Money: <%= user.money%>
+        </p>
+    </div>
+</nav>
+
+<div style="display: flex; flex-direction: column; margin: 10px 20px;">
+        <form id="form" method="post" action="play" style="display: flex;    flex-direction: column;    align-items: center; margin-top: 100px;">
+        <h3><%= title%></h3>
+        <div class="form-group">
+            <label for="inputNumber">Amount of money</label>
+            <input type="text" name="number" class="form-control" id="inputNumber" placeholder="Enter number">
+        </div>
+        <p style="text-align: center"><%= message%></p>
+    </form>
+
+    <p style="align-self: center">  <%= errorMessage%> </p>
+    <div id="ownerDiv" style="align-self: center">
+        <a id="play" class="btn btn-dark" style="color: white; align-self: center">Play</a>
+        <% if (casino.owner == user.id) { %>
+            <a id="remove" class="btn btn-dark" style="color: white; align-self: center">Remove G M</a>
+            <a id="countMoney" class="btn btn-dark" style="color: white; align-self: center">Count money in G M</a>
+            <a id="pickUpMoney" class="btn btn-dark" style="color: white; align-self: center">Pick up money from G M</a>
+            <a id="putMoney" class="btn btn-dark" style="color: white; align-self: center">Put money to G M</a>
+        <% }%>
+    </div>
+
+</div>
+
+<script>
+    const form = document.querySelector('#form');
+    document.querySelector("#ownerDiv").addEventListener('click', (event)=>{
+        console.log(event.target);
+        form.action = event.target.id;
+        form.submit();
+    });
+</script>
+
+</body>
+</html>
